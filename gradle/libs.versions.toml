@@ -20,6 +20,8 @@ spotless = "6.17.0"
 vault = "1.7.1"
 waterfall = "1.19-R0.1-SNAPSHOT"
 worldedit = "7.2.8"
+adventureBungee = "4.2.0"
+guardianBeam = "2.3.1"
 adventureBungee = "4.3.0"
 
 [libraries]
@@ -46,6 +48,7 @@ vault = { module = "com.github.MilkBowl:VaultAPI", version.ref = "vault" }
 waterfall = { module = "io.github.waterfallmc:waterfall-api", version.ref = "waterfall" }
 worldedit = { module = "com.sk89q.worldedit:worldedit-bukkit", version.ref = "worldedit" }
 adventureBungee = { module = "net.kyori:adventure-platform-bungeecord", version.ref = "adventureBungee"}
+guardianBeam = { module = "io.github.skytasul:guardianbeam", version.ref = "guardianBeam" }
 miniMessage = "net.kyori:adventure-text-minimessage:4.13.0"
 componentLogger = "net.kyori:adventure-text-logger-slf4j:4.13.0"
 

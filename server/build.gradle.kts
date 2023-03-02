@@ -22,6 +22,7 @@ dependencies {
 	implementation(libs.inventoryframework)
 	implementation(libs.jackson)
 	implementation(libs.moshipack)
+	implementation(libs.guardianBeam)
 	implementation(libs.kmongo)
 }
 
