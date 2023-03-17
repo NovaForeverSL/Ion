@@ -17,7 +17,8 @@ import org.bukkit.craftbukkit.v1_19_R2.CraftWorld
 import org.bukkit.craftbukkit.v1_19_R2.entity.CraftPlayer
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
-import java.util.EnumSet
+import org.bukkit.scheduler.BukkitRunnable
+import java.util.*
 
 val vaultEconomy = try {
 	Bukkit.getServer().servicesManager.getRegistration(Economy::class.java)?.provider
@@ -36,6 +37,10 @@ fun mainThreadCheck() {
 			Throwable()
 		)
 	}
+}
+
+fun runnable(e: BukkitRunnable.() -> Unit): BukkitRunnable = object : BukkitRunnable() {
+	override fun run() = e()
 }
 
 @Suppress("UNCHECKED_CAST")
