@@ -7,6 +7,7 @@ import net.horizonsend.ion.common.extensions.userError
 import net.horizonsend.ion.server.features.customItems.CustomItems.customItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.minimessage.MiniMessage
 import net.starlegacy.SLComponent
 import net.starlegacy.database.Oid
 import net.starlegacy.database.schema.economy.BazaarItem
@@ -27,6 +28,7 @@ import net.starlegacy.util.displayNameString
 import net.starlegacy.util.toCreditsString
 import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 import org.litote.kmongo.and
 import org.litote.kmongo.ascendingSort
@@ -95,7 +97,7 @@ object Bazaars : SLComponent() {
 				}.setName("Sort By $newSort").setLore(lore)
 			} + guiButton(Material.IRON_DOOR) { openMainMenu(terrId, playerClicker, remote) }.setName("Go Back")
 
-			val items: List<GuiItem> = BazaarItem
+			val items: MutableList<GuiItem> = BazaarItem
 				.find(and(BazaarItem::cityTerritory eq terrId, BazaarItem::itemString eq item, BazaarItem::stock gt 0))
 				.let { if (descend) it.descendingSort(sort.property) else it.ascendingSort(sort.property) }
 				.map { bazaarItem ->
@@ -108,7 +110,15 @@ object Bazaars : SLComponent() {
 						openPurchaseMenu(playerClicker, bazaarItem, sellerName, 0, remote)
 					}.setName(priceString).setLore(listOf("Seller: $sellerName", "Stock: $stock"))
 				}
-				.toList()
+				.toMutableList()
+			val itemForBackButton: ItemStack = ItemStack(Material.OAK_DOOR).apply {
+				this.editMeta { it.displayName(MiniMessage.miniMessage().deserialize("<purple>Back to City List")) }
+			}
+			val backButton = guiButton(itemForBackButton, action = {
+				openMainMenu(terrId, player, remote)
+				}
+			)
+			items.add(0 ,backButton)
 
 			val name = fromItemString(item).displayNameString
 
