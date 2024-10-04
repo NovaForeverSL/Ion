@@ -88,6 +88,13 @@ data class StarshipTypeBalancing(
 		hyperspaceRangeMultiplier = 1.4,
 		shieldPowerMultiplier = 1.0
 	),
+	val tanker: StarshipBalancing = StarshipBalancing(
+		sneakFlyAccelDistance = 10,
+		maxSneakFlyAccel = 3,
+		interdictionRange = 1800,
+		hyperspaceRangeMultiplier = 1.45,
+		shieldPowerMultiplier = 1.0
+	),
 
 	val starfighter: StarshipBalancing = StarshipBalancing(
 		sneakFlyAccelDistance = 4,
@@ -713,6 +720,7 @@ data class StarshipTypeBalancing(
 	val aiLightFreighter: StarshipBalancing = lightFreighter,
 	val aiMediumFreighter: StarshipBalancing = mediumFreighter,
 	val aiHeavyFreighter: StarshipBalancing = heavyFreighter,
+	val aiTanker: StarshipBalancing = tanker,
 
 	val aiStarfighter: StarshipBalancing = StarshipBalancing(
 		sneakFlyAccelDistance = 4,
